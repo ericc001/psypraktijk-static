@@ -48,6 +48,82 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit:100,200,300,400,500,600,700,800,900&display=swap"></noscript>
   <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
   
+  <!-- Custom styles for privacy notice -->
+  <style>
+    .privacy-notice {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #ffffff;
+      border-top: 1px solid #dee2e6;
+      padding: 20px 25px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      z-index: 9999;
+      transform: translateY(100%);
+      transition: transform 0.3s ease-in-out;
+      font-family: 'Outfit', sans-serif;
+    }
+    
+    .privacy-notice.show {
+      transform: translateY(0);
+    }
+    
+    .privacy-notice .container-fluid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      gap: 15px;
+    }
+    
+    .privacy-notice-text {
+      color: #333;
+      margin: 0;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    
+    .privacy-close-btn {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #666;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 3px;
+      transition: color 0.2s ease;
+      flex-shrink: 0;
+    }
+    
+    .privacy-close-btn:hover {
+      color: #333;
+      background-color: #f8f9fa;
+    }
+    
+    @media (max-width: 768px) {
+      .privacy-notice {
+        padding: 18px 20px;
+      }
+      
+      .privacy-notice .container-fluid {
+        flex-direction: row;
+        text-align: center;
+        gap: 10px;
+      }
+      
+      .privacy-notice-text {
+        font-size: 15px;
+      }
+      
+      .privacy-close-btn {
+        margin-top: 0;
+      }
+    }
+  </style>
+  
   <!-- Structured Data for Local Business -->
   <script type="application/ld+json">
   {
@@ -319,12 +395,47 @@
     </div>
 </section>
 
+<!-- Privacy Notice Bottom Bar -->
+<div id="privacyNotice" class="privacy-notice">
+  <div class="container-fluid">
+    <p class="privacy-notice-text">Ik geef om je privacy. Daarom plaats ik geen cookies. </p>
+    <button class="privacy-close-btn" onclick="closePrivacyNotice()" aria-label="Sluit privacy melding">
+      ✕
+    </button>
+  </div>
+</div>
+
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/smoothscroll/smooth-scroll.js"></script>
   <script src="assets/ytplayer/index.js"></script>
   <script src="assets/dropdown/js/navbar-dropdown.js"></script>
   <script src="assets/theme/js/script.js"></script>
 <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+<!-- Privacy Notice Script -->
+<script>
+  function closePrivacyNotice() {
+    const notice = document.getElementById('privacyNotice');
+    notice.classList.remove('show');
+    // Remember user's choice for this session
+    sessionStorage.setItem('privacyNoticeClosed', 'true');
+  }
+  
+  function showPrivacyNotice() {
+    const notice = document.getElementById('privacyNotice');
+    const wasClosed = sessionStorage.getItem('privacyNoticeClosed');
+    
+    if (!wasClosed) {
+      // Show notice after a short delay
+      setTimeout(() => {
+        notice.classList.add('show');
+      }, 1000);
+    }
+  }
+  
+  // Show the privacy notice when page loads
+  document.addEventListener('DOMContentLoaded', showPrivacyNotice);
+</script>
 
   
   
