@@ -3218,6 +3218,15 @@ strong {
     margin-top: 12px;
   }
 }
+.cid-tQY35iKdei .mbr-title {
+  color: #987A5A;
+  margin-top: 30px;
+}
+@media (max-width: 767px) {
+  .cid-tQY35iKdei .mbr-title {
+    margin-top: 12px;
+  }
+}
 .cid-tQY35iKdei .mbr-text {
   color: #353535;
   margin-top: 30px;
